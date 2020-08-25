@@ -1,6 +1,61 @@
 import { renderToReact } from "../latexContent";
+import { Fragment } from "react";
+
+function groupCommands(content) {
+  let groupedOut = [];
+  
+  let currentGroup = [];
+
+  content.forEach(elem => {
+    if (elem.kind == "command" || elem.kind == "parbreak") {
+      if (currentGroup.length > 0) {
+        groupedOut.push(currentGroup);
+        currentGroup = [];
+      }
+    }
+
+    currentGroup.push(elem);
+  });
+
+  if (currentGroup.length > 0) {
+    groupedOut.push(currentGroup);
+    currentGroup = [];
+  }
+
+  return groupedOut;
+}
 
 export default function Question({ originalText, environments, content, args }) {
+  const grouped = groupCommands(content);
+  const renderedGrouped = grouped.map((group, i) => {
+    const contentToRender = group[0].kind == "command" ? group.slice(1) : group;
+    const isHint = group[0].kind == "command" && group[0].name == "hint";
+
+    if (isHint) {
+      return <span style={{
+        fontStyle: "italic"
+      }} key={i}>
+        {renderToReact(
+          originalText,
+          i == grouped.length - 1 ?
+            {...environments, solution: Solution} :
+            environments,
+          contentToRender
+        )}
+      </span>
+    } else {
+      return <Fragment key={i}>
+        {renderToReact(
+          originalText,
+          i == grouped.length - 1 ?
+            {...environments, solution: Solution} :
+            environments,
+          contentToRender
+        )}
+      </Fragment>
+    }
+  })
+
   return <div style={{
     width: "100%",
     border: "2px solid #2D9CDB",
@@ -23,7 +78,7 @@ export default function Question({ originalText, environments, content, args }) 
       paddingTop: "10px",
       paddingBottom: "10px"
     }}>
-      {renderToReact(originalText, {...environments, solution: Solution}, content)}
+      {renderedGrouped}
     </div>
   </div>;
 }
