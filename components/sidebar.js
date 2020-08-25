@@ -12,7 +12,7 @@ export default function Sidebar({ path, displayPath, toc, current }) {
       cursor: "pointer"
     }}>{elem}</span>;
 
-    return <Link href={"/" + path.slice(0, i + 1).join("/")}>{text}</Link>
+    return <Link href={"/[...path]"} as={"/" + path.slice(0, i + 1).join("/")}>{text}</Link>
   });
 
   const joinedDisplay = displayedPath.map((e, i) => {
@@ -32,7 +32,7 @@ export default function Sidebar({ path, displayPath, toc, current }) {
       cursor: "Pointer"
     }}>{elem[0]}</span>;
 
-    return <li key={i}><Link href={"/" + [...pathBeforeToc, elem[1]].join("/")}>{linkContents}</Link></li>
+    return <li key={i}><Link href={"/[...path]"} as={"/" + [...pathBeforeToc, elem[1]].join("/")}>{linkContents}</Link></li>
   });
 
   return <div style={{
