@@ -1,6 +1,9 @@
 export default function Content({children}) {
   return <div style={{
-    padding: "20px"
+    padding: "20px",
+    maxHeight: "100vh",
+    overflowY: "scroll",
+    boxSizing: "border-box"
   }}>
     <h1 style={{
       fontSize: "64px",
