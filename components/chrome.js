@@ -12,6 +12,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 export default function Chrome({ path, displayPath, toc, current, children }) {
+  const title = current ? Object.entries(toc).find(e => e[1] == current)[0] : displayPath[displayPath.length - 1];
+
   return <div style={{
     maxHeight: "100vh"
   }}>
@@ -25,7 +27,7 @@ export default function Chrome({ path, displayPath, toc, current, children }) {
       flexDirection: "row"
     }}>
       <Sidebar path={path} displayPath={displayPath} current={current} toc={toc}></Sidebar>
-      <Content>
+      <Content title={title}>
         {children}
       </Content>
     </div>

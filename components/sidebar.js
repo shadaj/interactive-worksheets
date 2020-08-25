@@ -1,5 +1,3 @@
-import { css } from "styled-components"
-
 import csmLogo from "./csm_logo.svg";
 
 import Link from "next/link"
@@ -45,15 +43,18 @@ export default function Sidebar({ path, displayPath, toc, current }) {
     boxSizing: "border-box",
     flexShrink: 0
   }}>
-    <img src={csmLogo} style={{
-      display: "block",
-      marginLeft: "auto",
-      marginRight: "auto"
-    }}/>
+    <Link href={"/"}>
+      <img src={csmLogo} style={{
+        display: "block",
+        marginLeft: "auto",
+        marginRight: "auto",
+        cursor: "pointer"
+      }}/>
+    </Link>
     <div style={{
       marginTop: "30px",
-      borderTop: "1px solid white",
-      padding: "10px"
+      borderTop: displayedPath.length > 0 ? "1px solid white" : "none",
+      padding: displayedPath.length > 0 ? "10px" : "none"
     }}>
       <div style={{
         color: "#E0E0E0",
@@ -64,7 +65,6 @@ export default function Sidebar({ path, displayPath, toc, current }) {
       </div>
     </div>
     <div style={{
-      marginTop: "30px",
       borderTop: "1px solid white",
       padding: "10px"
     }}>

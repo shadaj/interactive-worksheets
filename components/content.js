@@ -1,4 +1,4 @@
-export default function Content({children}) {
+export default function Content({ title, children}) {
   return <div style={{
     padding: "20px",
     maxHeight: "100vh",
@@ -11,7 +11,7 @@ export default function Content({children}) {
       fontWeight: 700,
       marginTop: "10px",
       marginBottom: "10px"
-    }}>Introduction to Hypercubes</h1>
+    }}>{title}</h1>
     {children}
   </div>
 }
