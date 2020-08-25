@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export default function Chrome({ children }) {
+export default function Chrome({ path, displayPath, current, children }) {
   return <div style={{
     maxHeight: "100vh"
   }}>
@@ -24,7 +24,7 @@ export default function Chrome({ children }) {
       display: "flex",
       flexDirection: "row"
     }}>
-      <Sidebar></Sidebar>
+      <Sidebar path={path} displayPath={displayPath} current={current}></Sidebar>
       <Content>
         {children}
       </Content>

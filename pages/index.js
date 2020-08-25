@@ -17,7 +17,7 @@ export async function getStaticProps() {
 export default function IndexPage({ latex }) {
   return (
     <main>
-      <Chrome>
+      <Chrome path={[]} displayPath={[]} current={null}>
         <Head>
           <title>Home page</title>
         </Head>
