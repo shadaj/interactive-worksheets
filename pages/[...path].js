@@ -90,7 +90,7 @@ export async function getStaticProps({ params }) {
 export default function ContentPage({ latex, currentPage, toc, path, displayPath }) {
   return (
     <main>
-      <Chrome path={path} displayPath={displayPath} current={currentPage}>
+      <Chrome path={path} displayPath={displayPath} toc={toc} current={currentPage}>
         <Head>
           <title>Home page</title>
         </Head>

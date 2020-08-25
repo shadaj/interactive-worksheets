@@ -5,7 +5,7 @@ import csmLogo from "./csm_logo.svg";
 import Link from "next/link"
 import { Fragment } from "react";
 
-export default function Sidebar({ path, displayPath, current }) {
+export default function Sidebar({ path, displayPath, toc, current }) {
   let displayedPath = displayPath.map((elem, i) => {
     let text = (i == displayPath.length - 1) ? <span style={{
       fontWeight: 700,
@@ -22,7 +22,20 @@ export default function Sidebar({ path, displayPath, current }) {
       i > 0 && " › ",
       <Fragment key={1}>{e}</Fragment>
     ]}/>
-  })
+  });
+
+  const pathBeforeToc = current ? path.slice(0, -1) : path;
+
+  const tocDisplay = Object.entries(toc).map((elem, i) => {
+    const linkContents = current == elem[1] ? <span style={{
+      fontWeight: 700,
+      cursor: "Pointer"
+    }}>{elem[0]}</span> : <span style={{
+      cursor: "Pointer"
+    }}>{elem[0]}</span>;
+
+    return <li key={i}><Link href={"/" + [...pathBeforeToc, elem[1]].join("/")}>{linkContents}</Link></li>
+  });
 
   return <div style={{
     width: "320px",
@@ -48,6 +61,23 @@ export default function Sidebar({ path, displayPath, current }) {
         fontFamily: "'Roboto Slab', serif"
       }}>
         {joinedDisplay}
+      </div>
+    </div>
+    <div style={{
+      marginTop: "30px",
+      borderTop: "1px solid white",
+      padding: "10px"
+    }}>
+      <div style={{
+        color: "#E0E0E0",
+        fontSize: "18px",
+        fontFamily: "'Roboto Slab', serif"
+      }}>
+        <ul style={{
+          paddingInlineStart: "20px"
+        }}>
+          {tocDisplay}
+        </ul>
       </div>
     </div>
   </div>
