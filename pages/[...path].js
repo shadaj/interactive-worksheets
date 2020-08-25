@@ -3,9 +3,22 @@ import Head from 'next/head'
 import Chrome from '../components/chrome';
 import LatexContent from '../components/latexContent';
 
-export async function getStaticProps() {
+export async function getStaticPaths() {
+  return {
+    paths: [
+      {
+        params: {
+          path: ["test"],
+        },
+      }
+    ],
+    fallback: false,
+  }
+}
+
+export async function getStaticProps({ params }) {
   const fs = require('fs').promises;
-  const data = await fs.readFile("worksheets-repo/index.tex", "utf-8");
+  const data = await fs.readFile(`worksheets-repo/${params.path.join('/')}.tex`, "utf-8");
   
   return {
     props: {
@@ -14,7 +27,7 @@ export async function getStaticProps() {
   }
 }
 
-export default function IndexPage({ latex }) {
+export default function ContentPage({ latex }) {
   return (
     <main>
       <Chrome>
