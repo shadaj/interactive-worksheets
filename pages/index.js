@@ -1,34 +1,30 @@
 import Head from 'next/head'
 
 import Post from '../components/post'
+import Chrome from '../components/chrome';
+import LatexContent from '../components/latexContent';
 
 export async function getStaticProps() {
-  // fetch list of posts
-  const response = await fetch(
-    'https://jsonplaceholder.typicode.com/posts?_page=1'
-  )
-  const postList = await response.json()
+  const fs = require('fs').promises;
+  const data = await fs.readFile("worksheets-repo/test.tex", "utf-8");
+  
   return {
     props: {
-      postList,
+      latex: data,
     },
   }
 }
 
-export default function IndexPage({ postList }) {
+export default function IndexPage({ latex }) {
   return (
     <main>
-      <Head>
-        <title>Home page</title>
-      </Head>
+      <Chrome>
+        <Head>
+          <title>Home page</title>
+        </Head>
 
-      <h1>List of posts</h1>
-
-      <section>
-        {postList.map((post) => (
-          <Post {...post} key={post.id} />
-        ))}
-      </section>
+        <LatexContent code={latex}/>
+      </Chrome>
     </main>
   )
 }
