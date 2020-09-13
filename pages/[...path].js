@@ -1,5 +1,3 @@
-import Head from 'next/head'
-
 import Chrome from '../components/chrome';
 import LatexContent from '../components/latexContent';
 
@@ -91,10 +89,6 @@ export default function ContentPage({ latex, currentPage, toc, path, displayPath
   return (
     <main>
       <Chrome path={path} displayPath={displayPath} toc={toc} current={currentPage}>
-        <Head>
-          <title>Home page</title>
-        </Head>
-
         <LatexContent code={latex}/>
       </Chrome>
     </main>

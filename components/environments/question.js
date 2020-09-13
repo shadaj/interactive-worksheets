@@ -59,9 +59,9 @@ export default function Question({ originalText, environments, content, args }) 
   return <div style={{
     width: "100%",
     border: "2px solid #2D9CDB",
-    marginTop: "5px",
+    marginTop: "20px",
     borderRadius: "0px 0px 20px 20px"
-  }}>
+  }} className={"question"}>
     <p style={{
       margin: 0,
       paddingLeft: "10px",

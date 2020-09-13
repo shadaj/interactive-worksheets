@@ -3,7 +3,8 @@ export default function Content({ title, children}) {
     padding: "20px",
     maxHeight: "100vh",
     overflowY: "scroll",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
+    flexGrow: "1"
   }}>
     <h1 style={{
       fontSize: "64px",

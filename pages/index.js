@@ -1,5 +1,3 @@
-import Head from 'next/head'
-
 import Chrome from '../components/chrome';
 import LatexContent from '../components/latexContent';
 
@@ -20,10 +18,6 @@ export default function IndexPage({ latex, toc }) {
   return (
     <main>
       <Chrome path={[]} displayPath={[]} toc={toc} current={null}>
-        <Head>
-          <title>Home page</title>
-        </Head>
-
         <LatexContent code={latex}/>
       </Chrome>
     </main>
