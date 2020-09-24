@@ -46,9 +46,32 @@ export function renderToReact(originalText, environments, node) {
     }}/>;
   } else if (node.kind == "parbreak") {
     return <br/>
-  } else if (node.kind == "env") {
-    const ComponentToUse = environments[node.name];
-    return <ComponentToUse originalText={originalText} environments={environments} {...node}/>
+  } else if (node.kind == "env" || node.kind == "command") {
+    const componentOrArray = environments[node.name];
+    let actualContent = [];
+    if (node.kind == "env") {
+      actualContent = node.content;
+    } else {
+      node.args.forEach((arg) => {
+        if (arg.kind == "arg.group") {
+          actualContent.push(...arg.content);
+        }
+      })
+    }
+
+    const transformedNode = {
+      ...node,
+      content: actualContent
+    };
+
+    if (Array.isArray(componentOrArray)) {
+      const [ComponentToUse, callback] = componentOrArray;
+      callback(node);
+      return <ComponentToUse originalText={originalText} environments={environments} {...transformedNode}/>
+    } else {
+      const ComponentToUse = componentOrArray;
+      return <ComponentToUse originalText={originalText} environments={environments} {...transformedNode}/>
+    }
   } else {
     throw new Error("Cannot render node: " + JSON.stringify(node))
   }

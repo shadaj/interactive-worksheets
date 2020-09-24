@@ -1,5 +1,5 @@
 import { renderToReact } from "../latexContent";
-import { Fragment } from "react";
+import { Fragment, useContext, useMemo, useState } from "react";
 
 function groupCommands(content) {
   let groupedOut = [];
@@ -26,36 +26,6 @@ function groupCommands(content) {
 }
 
 export default function Question({ originalText, environments, content, args }) {
-  const grouped = groupCommands(content);
-  const renderedGrouped = grouped.map((group, i) => {
-    const contentToRender = group[0].kind == "command" ? group.slice(1) : group;
-    const isHint = group[0].kind == "command" && group[0].name == "hint";
-
-    if (isHint) {
-      return <span style={{
-        fontStyle: "italic"
-      }} key={i}>
-        {renderToReact(
-          originalText,
-          i == grouped.length - 1 ?
-            {...environments, solution: Solution} :
-            environments,
-          contentToRender
-        )}
-      </span>
-    } else {
-      return <Fragment key={i}>
-        {renderToReact(
-          originalText,
-          i == grouped.length - 1 ?
-            {...environments, solution: Solution} :
-            environments,
-          contentToRender
-        )}
-      </Fragment>
-    }
-  })
-
   return <div style={{
     width: "100%",
     border: "2px solid #2D9CDB",
@@ -78,12 +48,53 @@ export default function Question({ originalText, environments, content, args }) 
       paddingTop: "10px",
       paddingBottom: "10px"
     }}>
-      {renderedGrouped}
+      {renderToReact(
+        originalText,
+        {...environments, solution: Solution},
+        content
+      )}
     </div>
   </div>;
 }
 
+const displayedStepsContext = React.createContext();
 function Solution({ originalText, environments, content, args }) {
+  const registeredSteps = useMemo(() => {
+    const stepsToPopulate = [];
+    renderToReact(originalText, {
+      ...environments,
+      "hint": [DummyComponent, (node) => {
+        stepsToPopulate.push(node);
+      }],
+      "step": [DummyComponent, (node) => {
+        stepsToPopulate.push(node);
+      }]
+    }, content);
+
+    return stepsToPopulate;
+  }, [originalText, environments, content]);
+
+  const [nextProgress, setProgress] = useState(0);
+  let nextHint;
+  for (let i = nextProgress; i < registeredSteps.length; i++) {
+    if (registeredSteps[i].name == "hint") {
+      nextHint = i;
+      break;
+    }
+  }
+
+  let nextStep;
+  for (let i = nextProgress; i < registeredSteps.length; i++) {
+    if (registeredSteps[i].name == "step") {
+      nextStep = i;
+      break;
+    }
+  }
+
+  const [displayedSteps, setDisplayedSteps] = useState([]);
+
+  const hasControls = (nextHint != undefined || nextStep != undefined);
+
   return <div style={{
     marginTop: "5px",
     marginLeft: "-10px",
@@ -93,6 +104,72 @@ function Solution({ originalText, environments, content, args }) {
     paddingTop: "10px",
     borderTop: "1px solid black"
   }}>
-    {renderToReact(originalText, {...environments}, content)}
+    <displayedStepsContext.Provider value={displayedSteps}>
+      {renderToReact(originalText, {
+        ...environments,
+        "hint": Hint,
+        "step": Step
+      }, content)}
+    </displayedStepsContext.Provider>
+    <div style={{
+      display: hasControls ? "block" : "none",
+      marginTop: "5px"
+    }}>
+      {nextHint != undefined && <button style={{
+        border: "1px solid #9B51E0",
+        fontFamily: "'Nunito', sans-serif",
+        fontSize: "18px",
+        backgroundColor: "transparent",
+        borderRadius: "10px",
+        padding: "5px",
+        marginRight: "10px",
+        cursor: "pointer"
+      }} onClick={() => {
+        setProgress(nextHint + 1);
+        setDisplayedSteps([...displayedSteps, registeredSteps[nextHint]]);
+      }}>get a hint</button>}
+
+      {nextStep != undefined && <button style={{
+        border: "1px solid #F2994A",
+        fontFamily: "'Nunito', sans-serif",
+        fontSize: "18px",
+        backgroundColor: "transparent",
+        borderRadius: "10px",
+        padding: "5px",
+        marginRight: "10px",
+        cursor: "pointer"
+      }} onClick={() => {
+        setProgress(nextStep + 1);
+        setDisplayedSteps([...displayedSteps, registeredSteps[nextStep]]);
+      }}>show next step</button>}
+    </div>
   </div>;
+}
+
+function DummyComponent(props) {
+  return null;
+}
+
+function Hint({ originalText, environments, content, args, location }) {
+  const displayedSteps = useContext(displayedStepsContext);
+  const shouldDisplay = displayedSteps.some((e) => e.location == location);
+
+  if (shouldDisplay) {
+    return <div style={{fontStyle: "italic"}}>
+      {renderToReact(originalText, environments, content)}
+    </div>
+  } else {
+    return null;
+  }
+}
+
+function Step({ originalText, environments, content, args, location }) {
+  const displayedSteps = useContext(displayedStepsContext);
+  const shouldDisplay = displayedSteps.some((e) => e.location == location);
+
+  if (shouldDisplay) {
+    return <div>{renderToReact(originalText, environments, content)}</div>
+  } else {
+    return null;
+  }
 }
