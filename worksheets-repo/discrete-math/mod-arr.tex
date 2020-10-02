@@ -1,1 +1,35 @@
 CRT and RSA problems
+
+
+\begin{question}
+What is the multiplicative inverse of $3 \pmod{7}$ ?
+
+\begin{solution}
+\hint{What number do you multiply it by $3$ gives you $1 \pmod{7}$?}
+
+\step{We can simply guess and check. Let's list a couple of multiples of $7$ : $\{7,14,21\}$. Observe that $3\cdot5 = 15 \equiv 1 \pmod{7}$. Hence, we know that $5 \pmod{7}$ is the mutliplicative inverse of $3 \pmod{7}$.}
+\end{solution}
+\end{question}
+
+\begin{question}
+What is the multiplicative inverse of $n-1$ modulo $n$? (An expression that may involve $n$. Simplicity matters.)
+
+\begin{solution}
+\hint{Focus on the $-1$ term.}
+
+\step{Observe that no matter what number $k$ we multiply $n-1$ by, we have $kn-k$ where the first term will always become $0 \pmod{n}$. Hence, we are looking for a value $k$ such that $-k \equiv 1 \pmod{n}$. Now, we see that $k \equiv -1 \pmod{n}$, which implies that $k \equiv n-1 \pmod{n}$. Thus, the multiplicative inverse is $n-1 \pmod{n}.
+\end{solution}
+\end{question}
+
+
+\begin{question}
+What is the solution to the equation $3x \equiv 6 \pmod{17}? (A number in $\{0, \ldots, 16\}$ or "No solution".)
+
+\begin{solution}
+\hint{What is the multiplicative inverse of $3 \pmod{17}$?}
+
+\step{Since gcd$(3,17)= 1$, we know that the inverse of $3 \pmod{17}$ exists. Hence, we can immediately check that $6 \pmod{17}$ is the inverse because $3\cdot 6 = 18 \pmod{17} = 1.$ Then we multply both sides by $6$ and get $x \equiv 36 \pmod{17}$, which evaluates to $x \equiv 2 \pmod{17}$.
+}
+\end{solution}
+\end{question}
+
