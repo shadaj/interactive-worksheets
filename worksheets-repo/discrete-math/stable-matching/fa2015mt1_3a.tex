@@ -1,22 +1,22 @@
 \begin{question}
 (Fa15 MT1 Q3a) For $n=2$ (aka any stable marriage instance with 2 men and 2 women), man $A$ has the same optimal and pessimal woman. (T/F)
-\end{question}
 \begin{solution}
 \hint{Try to draw out some examples - what happens when you reverse man $A$'s preference list?}
 \step{If man $A$ always has the same optimal and pessimal woman, this means that there is only one stable pairing across all instances, which is false.}
 \end{solution}
+\end{question}
 
 \begin{question}
 In any stable marriage instance, in the pairing in TMA, there is some man who gets his favorite woman. (T/F)
-\end{question}
 \begin{solution}
 \hint{Again, try to draw out some examples (in particular, try $n\ge 3$)}
 \step{Consider the stable marriage instance below:\\
-% $\begin{array}{cc|cc}
-% 	M & & W & \\\hline
-% 	A & (2,3,1) & 1 & (A,B,C) \\
-% 	B & (1,2,3) & 2 & (B,C,A) \\
-% 	C & (2,1,3) & 3 & (C,A,B)
-% \end{array}$
+$$\begin{array}{cc|cc}
+	M & & W & \\\hline
+	A & (2,3,1) & 1 & (A,B,C) \\
+	B & (1,2,3) & 2 & (B,C,A) \\
+	C & (2,1,3) & 3 & (C,A,B)
+\end{array}$$
 Then the stable pairing is $(A, 3), (B, 2), (C,1),$ which is suboptimal for every person. So the statement is false.}
 \end{solution}
+\end{question}
