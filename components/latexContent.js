@@ -44,10 +44,19 @@ export function renderToReact(originalText, environments, node) {
     return <span dangerouslySetInnerHTML={{
       __html: katex.renderToString(originalText.slice(node.location.start.offset + 1, node.location.end.offset - 1))
     }}/>;
-  } else if (node.kind == "parbreak") {
+  } else if (node.kind == "displayMath") {
+    return <div dangerouslySetInnerHTML={{
+      __html: katex.renderToString(originalText.slice(node.location.start.offset + 2, node.location.end.offset - 2))
+    }}/>;
+  } else if (node.kind == "parbreak" || (node.kind == "command" && node.name == "\\")) {
     return <br/>
   } else if (node.kind == "env" || node.kind == "command") {
     const componentOrArray = environments[node.name];
+
+    if (componentOrArray == undefined) {
+      return <b>Unknown environment: {JSON.stringify(node)}</b>;
+    }
+
     let actualContent = [];
     if (node.kind == "env") {
       actualContent = node.content;
@@ -73,7 +82,7 @@ export function renderToReact(originalText, environments, node) {
       return <ComponentToUse originalText={originalText} environments={environments} {...transformedNode}/>
     }
   } else {
-    throw new Error("Cannot render node: " + JSON.stringify(node))
+    return <b>Cannot render node: {JSON.stringify(node)}</b>;
   }
 }
 
