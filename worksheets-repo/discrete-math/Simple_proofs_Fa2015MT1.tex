@@ -1,0 +1,24 @@
+\begin{question}
+Prove or disprove that for integers $a$, $b$, if $a + b \geq 1016$ that either $a$ is at least 508 or $b$ is at least 508.
+\begin{solution}
+\hint{Try to figure out whether you're proving or disproving first: what happens when a and b are both less than 508?}
+\step{When a and b are both less than 508, a + b cannot reach 1016.}
+\hint{Now, see if you can finalize the above statement into a formal proof!}
+\step{This proof can be done using the methods of contraposition, which says $\neg Q \implies \neg P$ is the same as proving $P \implies Q$.}
+\step{Assume that $a < 508 \vee b < 508$. By simple addition, $a + b < 1016$. We have thus proved that if neither $a$ nor $b$ is at least 508, $a + b \geq 1016$ is not true. EOF.}
+\end{solution}
+\end{question}
+
+\begin{question}
+Prove or disprove that $\sqrt{8}$ is irrational.
+\begin{solution}
+\hint{This question is very similar to the proof for $\sqrt{2}$!}
+\step{Recall that we used contradiction by assuming the number is rational.}
+\hint{Now, how do we write represent a rational number?}
+\step{Assuming that $\sqrt{8}$ is rational. It can thus be represented by two co-prime integers, $a$ and $b$, where $\sqrt{8} = \frac{a}{b}.}
+\hint{From there, how can we get rid of the square-root?}
+\step{Squaring both sides, we get $8 = \frac{a^2}{b^2}$, furthermore $a^2 = 8b^2$.}
+\hint{Is it possible for this relation to be true, given that $a$ and $b$ are coprime?}
+\step{For $a^2$ to be a valid square that is divisible by 8, it has to have a factor of $8^2 = 64$. Under that condition, $b$ has to have a factor of 8 too. Therefore, $a$ and $b$ cannot be coprime because they share a factor of 8. We have now reached a contradition on whether $a$ and $b$ are coprime or not, thus, our initial assumption that $\sqrt{8}$ is rational must be false.}
+\end{solution}
+\end{question}

@@ -1,3 +1,6 @@
 {
-  "Graph Theory": "graph-theory"
+  "Graph Theory": "graph-theory",
+  "Stable Matching" : "stable-matching",
+  "Modular Arithmetic" : "mod-arr",
+  "Counting" : "counting"
 }

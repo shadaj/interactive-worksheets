@@ -1,0 +1,29 @@
+\begin{question}
+How many distinguishable orderings of CALIFORNIA are there? 
+\begin{solution}
+\hint{How many letters are there? How many ways can you arrange them if they are all distinct?}
+\step{There are $10$ letters and if they are all distinct we would have $10!$ ways to arrange them.}
+\hint{Are we overcounting here? Think about the second rule of counting.}
+\step{Observe that there are $2$ A's and $2$ I's, let's call them $A_1A_2$ and $I_1I_2$ for illustration purposes (they are still the same thing). When we compute $10!$, we are also considering the orders that contain $A_1A_2,A_2A_1, I_1I_2, I_2I_1$. Thus we are clearly overcounting. Hence, by the second rule of counting, we can divide by the number of orderings of these duplicates, which gives $\frac{10!}{2!2!}$ as our final answer.}
+\end{solution}
+\end{question}
+
+\begin{question}
+How many ways are there to split up $\$10$ among Bob, Alice and Eve? (Notice that it is valid to give $\$0$ to one or two of the people.) 
+\begin{solution}
+\hint{Try to intepret the problem as finding the number of solutions to an equation.}
+\step{We can treat this problem as if we are finding the number of solutions to the equation $b+a+e = 10$ where $b,a,e \geq 0$.}
+\hint{Consider stars and bars.}
+\step{We can use stars and bars for this problem. There are $10$ stars and $3-1=2$ bars. Hence, the total number of ways we can arrange them would be $\binom{12}{2} = 66$.}
+\end{solution}
+\end{question}
+
+\begin{question}
+How many ways are there to split up $\$10$ among Bob, Alice and Eve so that Eve gets at least $\$5$?
+\begin{solution}
+\hint{Consider stars and bars again but with some extra constraints.}
+\step{So we have a similar setup to the previous part. The only difference is that we need $e\geq 5$. To do so, we can start off with $10$ stars and $2$ bars as usual.}
+\hint{What can you do to ensure that $e \geq 5$?}
+\step{Since we know that $e$ must have at least $5$ stars, we can simply remove the last $5$ stars as if we are reserving them for $e$. Then we are left with $10-5=5$ stars and $2$ bars. Then, we directly use the traditional stars and bars method and get $\binom{7}{2}$.}
+\end{solution}
+\end{question}
