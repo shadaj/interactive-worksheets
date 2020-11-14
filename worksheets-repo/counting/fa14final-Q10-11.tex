@@ -1,0 +1,98 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,textcomp,amssymb,geometry,graphicx,enumerate}
+\usepackage{algorithm} % Boxes/formatting around algorithms
+\usepackage[noend]{algpseudocode} % Algorithms
+\usepackage{hyperref}
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
+
+\title{CS70 Fall 2014 Solutions}
+\author{Seenu Madhavan}
+
+\pagestyle{myheadings}
+\date{November 7, 2020}
+
+\newenvironment{qparts}{\begin{enumerate}[{(}a{)}]}{\end{enumerate}}
+\def\endproofmark{$\Box$}
+\newenvironment{proof}{\par{\bf Proof}:}{\endproofmark\smallskip}
+
+\textheight=9in
+\textwidth=6.5in
+\topmargin=-.75in
+\oddsidemargin=0.25in
+\evensidemargin=0.25in
+
+
+\begin{document}
+\maketitle
+
+
+
+\section*{10. Two Face}
+Suppose you have two coins, one that has heads on both sides and another that has tails on both sides.
+\begin{qparts}
+\item
+You pick one of the two coins uniformly at random and you flip that coin 400 times. Approximate the
+probability of getting more than 220 heads. Your answer should be a number that approximates this
+probability, accurate to 2 digits after the decimal point.
+
+\color{blue}
+Hint: What is the outcome when we pick the double-headed coin? The double-tailed coin?
+
+\color{black}
+\item
+You pick one of the two coins uniformly at random and flip it. You repeat this process 400 times, each
+time picking one of the two coins uniformly at random and then flipping it, for a total of 400 flips.
+Approximate the probability of getting more than 220 heads. Your answer should be a number that
+approximates this probability, accurate to 2 digits after the decimal point.
+
+\color{blue}
+Hint: How many SDs from the mean is 220?
+
+\color{black}
+\item
+Now you pick one of the two coins uniformly at random and flip it four times. You repeat this process
+100 times, each time picking one of the two coins uniformly at random and then flipping it four times,
+for a total of 400 flips. Approximate the probability of getting more than 220 heads. Your answer
+should be a number that approximates this probability, accurate to 2 digits after the decimal point.
+
+\color{blue}
+Hint: Again, we are estimating a probability, so use CLT.
+
+\color{black}
+
+\end{qparts}
+
+
+
+
+
+
+
+
+
+\section*{11. Estimating $\pi$}
+One can estimate $\pi$ by playing darts with a special dartboard shown in figure 1. Assume every time you
+throw a dart, the dart will always be inside the square. The probability that your dart lands inside the circle
+is equal to the ratio of the area of the circle to the area of the square, i.e., $\frac{\pi}{4}$
+. Let $X_i$ be the random variable
+denoting whether your dart is within the circle after your $i$-th throw.
+
+
+\noindent
+\textbf{How can you estimate $\pi$ using this experiment? How many times should you throw to ensure your estimation error is within 0.01 with probability at least 95\%?} (You can just leave the numerical expression
+of the number of times but not compute the exact value.)
+
+\color{blue}
+
+\noindent
+Hint: Which inequality allows us to bound the probability that a random variable is a certain distance from the mean?
+
+
+\end{document}
