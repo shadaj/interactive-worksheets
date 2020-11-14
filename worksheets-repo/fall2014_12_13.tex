@@ -1,0 +1,62 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+
+\begin{document}
+
+\section{Fall 2014 Problem 12}
+\begin{question}
+Consider a secret-sharing scheme over GF(5) that divides a secret among 4 people. Assume the secret is
+uniformly chosen from 0,1,2,3,4. We use the standard polynomial-based secret-sharing scheme so that any
+2 people can recover the secret. The linear coefficient in the polynomial is chosen uniformly from 0,1,2,3,4
+and independently of the secret.
+\\ \\ \textbf{Show that the shares (i.e. values obtained by evaluating the polynomial at their point) given to person
+1 and person 2 are independent.} 
+\\\\\hint{\textit{Hint: Try to set up a joint distribution for the shares and make a relationship with the joint distribution of the secret and coefficient.}}
+\\\\
+\begin{solution}
+\textit{Solution:}
+\\Since any 2 people can uniquely identify a secret, we must be dealing with a degree 1 polynomial. We are also told that the linear coefficient in the polynomial is chosen uniformly, and the secret is chosen independently of the coefficient. Let X\textsubscript{0} and X\textsubscript{1} be the random variables corresponding to the secret and the coefficient, respectively. Assuming our secret is at x=0, the coefficient and the secret uniquely determine the polynomial. Since the polynomial is degree 1, we also know that any 2 points uniquely identify this polynomial. We can take the 2 shares associated with person 1 and person 2 as Y\textsubscript{1} and Y\textsubscript{2}, respectively, as 2 points to uniquely identify this polynomial.
+\\\\Notice that both pairs of numbers uniquely identify the polynomial. Thus, there must be a bijection between the random variable pairs (X\textsubscript{0}, X\textsubscript{1}) and (Y\textsubscript{1}, Y\textsubscript{2}).
+\\Thus,
+\[Pr[(Y_1, Y_2) =(y_1, y_2)] = Pr[(X_0, X_1) =(x_0, x_1)] \]
+\\In the above equality, we equate the probability of any pair of shares of person 1 and person 2 to the probability of any secret-coefficient pair. We can further simplify the joint distribution using the fact that X\textsubscript{0} and X\textsubscript{1} are independent random variables.
+\[Pr[(X_0, X_1) =(x_0, x_1)] = Pr[X_0 =x_0]Pr[X_1 =x_1] = (\frac{1}{5})(\frac{1}{5}) = \frac{1}{25}\]
+\[Pr[(Y_1, Y_2) =(y_1, y_2)] = \frac{1}{25}\]
+Since we are working over GF(5), the joint distribution of Y\textsubscript{1} and Y\textsubscript{2} is uniform and independent over a 5x5 square. Thus the shares are independent.
+
+\end{solution}
+
+
+\end{question}
+
+\section{Fall 2014 Problem 13}
+\begin{question}
+If \(P(A) > P(B) \), and \(P(C|A)>P(C|B)\), then \(P(A|C)>P(B|C)\). \textbf{True or False?}
+\\\\\hint{\textit{Hint: Try using the conditional probability formulas involving the intersection of 2 events.}}
+\begin{solution}
+\\\\\textit{Solution:}
+\\\textbf{True.}
+\\We can formulate our solution by interchanging conditional probability in terms of the intersection of 2 events. We can achieve this by multiplying the probabilities. 
+We know for any 2 events X and Y, 
+\[P(X \cap Y) = P(X|Y)P(Y) \]
+\[P(X \cap Y) = P(Y|X)P(X) \]
+We can use these rules in deriving the answer. The following inequality holds because probabilities are always non-negative:
+\[P(A)P(C|A)>P(B)P(C|B)\]
+\[P(A\cap C>P(B \cap C)\]
+\[P(C)P(A|C)>P(C)P(B|C)\]
+\[P(A|C)>P(B|C)\]
+In the last step, we could divide out the \(P(C)\) because the probability is non-negative, so the inequality does not flip.
+
+
+
+
+
+
+\end{solution}
+
+
+\end{question}
+
+
+\end{document}
