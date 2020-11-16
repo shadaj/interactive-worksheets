@@ -1,0 +1,62 @@
+\documentclass{article}
+
+% If you're new to LaTeX, here's some short tutorials:
+% https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+% https://en.wikibooks.org/wiki/LaTeX/Basics
+
+% Formatting
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[titletoc,title]{appendix}
+
+% Math
+% https://www.overleaf.com/learn/latex/Mathematical_expressions
+% https://en.wikibooks.org/wiki/LaTeX/Mathematics
+\usepackage{amsmath,amsfonts,amssymb,mathtools}
+
+% Images
+% https://www.overleaf.com/learn/latex/Inserting_Images
+% https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+\usepackage{graphicx,float}
+
+% Tables
+% https://www.overleaf.com/learn/latex/Tables
+% https://en.wikibooks.org/wiki/LaTeX/Tables
+
+% Algorithms
+% https://www.overleaf.com/learn/latex/algorithms
+% https://en.wikibooks.org/wiki/LaTeX/Algorithms
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+
+% Code syntax highlighting
+% https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted
+\usepackage{minted}
+\usemintedstyle{borland}
+
+% References
+% https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX
+% https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+% Title content
+\title{Fall 2014 Final Question 4}
+
+\DeclareUnicodeCharacter{2212}{-}
+\begin{document}
+
+\maketitle
+
+\section{Equate It (Question 4)}
+Use a combinatorial argument to prove that the following combinatorial identity is true.
+
+$$n2^{n-1} = {n \choose 1} + 2 {n \choose 2} + ... + (n-1) {n \choose n-1} + n {n \choose n}$$
+
+\subsection{Solution}
+We want to count the number of ways that we can select a team with a single leader out of $n$ people. We don’t allow an empty team because we insist on having a single leader.
+\newline Left-hand side: From $n$ people, pick one team leader and then some (possibly empty) subset of other people on his team.
+\newline Right-hand side: First pick $k$ people on the team, then pick the leader among them. For example, when $k$ is 2, we first choose our team of 2 people in $n \choose 2$ ways, then pick a leader in 2 ways because there are only 2 members to choose from.
+\newline Since the left-hand side and the right-hand side count the same thing, they are equal. Q.E.D.
+
+\end{document}

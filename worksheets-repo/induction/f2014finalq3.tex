@@ -1,0 +1,60 @@
+\documentclass{article}
+
+% If you're new to LaTeX, here's some short tutorials:
+% https://www.overleaf.com/learn/latex/Learn_LaTeX_in_30_minutes
+% https://en.wikibooks.org/wiki/LaTeX/Basics
+
+% Formatting
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+\usepackage[titletoc,title]{appendix}
+
+% Math
+% https://www.overleaf.com/learn/latex/Mathematical_expressions
+% https://en.wikibooks.org/wiki/LaTeX/Mathematics
+\usepackage{amsmath,amsfonts,amssymb,mathtools}
+
+% Images
+% https://www.overleaf.com/learn/latex/Inserting_Images
+% https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions
+\usepackage{graphicx,float}
+
+% Tables
+% https://www.overleaf.com/learn/latex/Tables
+% https://en.wikibooks.org/wiki/LaTeX/Tables
+
+% Algorithms
+% https://www.overleaf.com/learn/latex/algorithms
+% https://en.wikibooks.org/wiki/LaTeX/Algorithms
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{algorithmic}
+
+% Code syntax highlighting
+% https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted
+\usepackage{minted}
+\usemintedstyle{borland}
+
+% References
+% https://www.overleaf.com/learn/latex/Bibliography_management_in_LaTeX
+% https://en.wikibooks.org/wiki/LaTeX/Bibliography_Management
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+% Title content
+\title{Fall 2014 Final Question 3}
+
+\DeclareUnicodeCharacter{2212}{-}
+\begin{document}
+
+\maketitle
+
+\section{Prove It (Question 3)}
+Prove by induction that $5^n - 1$ is divisible by 4 for all integers $n \geq 1$.
+
+\subsection{Solution}
+Base Case: $P(1)$: $5^1 - 1 = 4$, which is clearly divisible by 4.
+\newline Inductive Hypothesis: Suppose $P(k)$: $5^k − 1$ is divisible by 4 for some integer $k > 1$.
+\newline Inductive Step: We want to show that $P(k) \Rightarrow P({k+1})$.
+\newline By the Inductive Hypothesis, since $5^k - l$ is divisible by 4, $5^k - 1 = 4l$ for some integer $l$. $5^{k+1} - 1 = 5 \cdot 5k - 1 = 5 (5k - 1) + 4 = 5(4l) + 4 = 4(5l + 1)$, which means $5^{k+1} - 1$ is also divisible by 4. By the Principle of Induction, the original statement must hold. Q.E.D.
+
+\end{document}
